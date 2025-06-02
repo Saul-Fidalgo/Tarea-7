@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: tarea7-recognizer
+    env: python
+    buildCommand: ""
+    startCommand: "python App.py"
+    envVars:
+      - key: FLASK_ENV
+        value: production

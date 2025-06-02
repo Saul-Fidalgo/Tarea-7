@@ -1,42 +1,108 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="auto">
 <head>
-    <meta charset="UTF-8">
-    <title>Resultado</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resultado Detectado</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #f1f1f1;
+      font-family: 'Rubik Mono One', sans-serif;
+      padding: 3rem 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .console-output {
+      background: rgba(0, 0, 0, 0.5);
+      border: 2px solid #8be9fd;
+      padding: 2rem;
+      border-radius: 14px;
+      width: 100%;
+      max-width: 760px;
+      box-shadow: 0 0 20px #8be9fd99;
+      text-shadow: 1px 1px 1px #000;
+    }
+
+    .console-output h1 {
+      color: #50fa7b;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .result-line {
+      margin: 0.8rem 0;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      word-break: break-word;
+    }
+
+    .highlight {
+      color: #ff79c6;
+    }
+
+    .btn-return {
+      margin-top: 2.5rem;
+      background: #bd93f9;
+      color: #1e1e2f;
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-return:hover {
+      transform: scale(1.05);
+      background: #ffb86c;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      color: #bbb;
+      text-align: center;
+    }
+  </style>
+  <script>
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+  </script>
 </head>
-<body class="bg-light">
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow-lg">
-                <div class="card-body">
-                    <h3 class="card-title text-center mb-4">Resultado de la Operación</h3>
+<body>
 
-                    <ul class="list-group mb-4">
-                        <li class="list-group-item"><strong>Texto detectado:</strong> {{ texto }}</li>
-                        <li class="list-group-item">
-                            <strong>Operación:</strong>
-                                {% if operador %}
-                                    {{ num1 }} {{ operador }} {{ num2 }} ({{ tipo_operacion }})
-                                {% else %}
-                                    No detectada
-                                {% endif %}
-                        </li>
-
-                        <li class="list-group-item"><strong>Resultado:</strong> {{ resultado }}</li>
-                    </ul>
-
-                    <div class="d-grid gap-2">
-                        <a href="{{ url_for('index') }}" class="btn btn-secondary">Procesar otra imagen</a>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-3">
-                <small class="text-muted">Proyecto de Reconocimiento de Operaciones</small>
-            </div>
-        </div>
+  <div class="console-output">
+    <h1>📟 Resultado Analizado</h1>
+    <div class="result-line">📝 <span class="highlight">Texto detectado:</span> {{ texto }}</div>
+    <div class="result-line">➕ <span class="highlight">Operación:</span>
+      {% if operador %}
+        {{ num1 }} {{ operador }} {{ num2 }} ({{ tipo_operacion }})
+      {% else %}
+        No se detectó una operación válida.
+      {% endif %}
     </div>
-</div>
+    <div class="result-line">✅ <span class="highlight">Resultado:</span> {{ resultado }}</div>
+  </div>
+
+  <a href="/" class="btn-return">⬅ Procesar otra imagen</a>
+
+  <footer>Hecho con inteligencia artificial y Python 🔍</footer>
+
 </body>
 </html>
+
+
+
